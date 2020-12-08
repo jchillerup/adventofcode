@@ -5,6 +5,8 @@ import time
 program = load_program_from_file("input-little.txt")
 cpu = CPU(program)
 
+
+tic = time.monotonic()
 # Star 1
 visited = list()
 while True:
@@ -14,8 +16,13 @@ while True:
     else:
         print(cpu.acc)
         break
+toc = time.monotonic()
+
+print(toc-tic)
+
 
 # Star 2
+tic = time.monotonic()
 for idx, ins in enumerate(program):
     new_program = program.copy()
     if ins[0] == "jmp":
@@ -38,4 +45,6 @@ for idx, ins in enumerate(program):
     
     if cpu.ip == len(program):
         print(cpu.acc)
-        exit()
+        break;
+toc = time.monotonic()
+print(toc-tic)
