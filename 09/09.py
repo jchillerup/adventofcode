@@ -22,18 +22,15 @@ def check(haystack, sum_):
 
     return False
 
+# Star 1
 for sum_, haystack in zip(numbers[PREAMBLE_LENGTH:], sliding_window(numbers, PREAMBLE_LENGTH)):
     if check(haystack, sum_) == False:
         print(sum_)
         break;
 
 # Star 2
-
 for win_length in range(len(numbers)):
-    
     for w in sliding_window(numbers, win_length):
-        #print(w)
-        #print(sum(w))
         if sum(w) == sum_:
-            print(w)
             print(min(w)+max(w))
+            exit()
