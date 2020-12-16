@@ -50,10 +50,24 @@ def parse(filename):
             filtered_nearby.append(values)
 
     filtered_nearby = np.array(filtered_nearby)
+    probable_fields = list()
     for column in range(len(filtered_nearby[0])):
         f = [x[0] for x in find_probable_field(fields, filtered_nearby[:,column])]
-        print (column, f)
+        probable_fields.append( (len(f), column, set(f)) )
+    
+    probable_fields.sort(key=lambda x: x[0])
 
+    last = set()
+    my_ticket_vals = [int(x) for x in raw_myticket.split("\n")[1].split(",")]
+    mult = 1
+    for f in probable_fields:
+        description = list(f[2] - last)[0]
+        if "departure" == description.split(" ")[0]: 
+            print(f[1], description, my_ticket_vals[f[1]])
+            mult *= my_ticket_vals[f[1]]
+        last = f[2]
+
+    print(mult)
 
     return 0,0,0
 
