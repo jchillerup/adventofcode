@@ -8,16 +8,11 @@ for fish in in_fishes:
 def step_fishes(fishes):
     new_fishes = defaultdict(int)
 
-    new_fishes[0] = fishes[1]
-    new_fishes[1] = fishes[2]
-    new_fishes[2] = fishes[3]
-    new_fishes[3] = fishes[4]
-    new_fishes[4] = fishes[5]
-    new_fishes[5] = fishes[6]
-    new_fishes[6] = fishes[7] + fishes[0]
-    new_fishes[7] = fishes[8]
-    new_fishes[8] = fishes[0]
-
+    for i in range(9):
+        new_fishes[i] = fishes[(i+1) % 9]
+    
+    new_fishes[6] += fishes[0]
+    
     return new_fishes
     
 def fish_sum(fishes):

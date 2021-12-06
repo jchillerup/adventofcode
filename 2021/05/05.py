@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def sign(number):
     if number > 0:
         return 1
@@ -17,10 +16,6 @@ def line(p1, p2):
         yield(ptr)
         ptr += slope
     yield(p2)
-
-    #for x in range(minx, minx+xspan+1):
-    #    for y in range(miny, miny+yspan+1):
-    #        yield(x, y)
 
 def draw_line(i, diagonal=False):
     p1,p2 = [np.array((int(x), int(y))) for x,y in [x.split(",") for x in i.split(" -> ")]]
