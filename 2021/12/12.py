@@ -13,16 +13,32 @@ for line in open('input.txt').readlines():
 def is_lowercase(s):
     return s == s.lower()
 
-def traverse(node, path=[]):
-    if is_lowercase(node) and node in path: return
+def path_saturated(path):
+    path.sort()
+    for idx, p in enumerate(path):
+        if idx == 0: continue
+
+        if is_lowercase(p) and p == path[idx-1]:
+            return True
+    return False
+
+def may_visit(s, path):
+    if s == "start" and len(path) > 0:
+        return False
     
-    new_path = list(path)
-    new_path.append(node)
+    if is_lowercase(s) and s in path and path_saturated(path):
+        return False
+    
+    return True
+
+def traverse(node, path=[]):
+    if not may_visit(node, path): return
 
     if node == "end":
-        print(new_path)
+        print(path+[node])
+        return
 
     for neighbor in G[node]:
-        traverse(neighbor, new_path)
+        traverse(neighbor, path+[node])
 
 traverse("start", [])
