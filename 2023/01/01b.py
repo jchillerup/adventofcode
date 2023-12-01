@@ -16,9 +16,9 @@ def munch(input):
 
 calibration_sum = 0
 for line in lines:
-    digits = list(filter(lambda x: x.isdigit(), list(munch(line))))
+    digits = list(munch(line))
 
     # print(digits)
     calibration_sum += int("%s%s" % (digits[0], digits[-1]))
 
-print(calibration_sum)
+print(calibration_sum)  
